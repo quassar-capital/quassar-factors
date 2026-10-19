@@ -1,4 +1,3 @@
-
 """Cross-sectional factor research primitives with explicit numerical contracts.
 
 Observations are rows; assets and factors are columns. No annualization is implicit.
@@ -65,13 +64,17 @@ def fit_factor_model(
     alpha = coefficients[0] if intercept else np.zeros(y.shape[1])
     betas = coefficients[1:] if intercept else coefficients
     return FactorFit(
-        coefficients=betas.copy(), intercept=alpha.copy(),
+        coefficients=betas.copy(),
+        intercept=alpha.copy(),
         residuals=(y - design @ coefficients).copy(),
-        rank=int(rank), condition_number=condition,
+        rank=int(rank),
+        condition_number=condition,
     )
 
 
-def factor_covariance(factor_cov: ArrayLike, exposures: ArrayLike, specific_var: ArrayLike) -> NDArray[np.float64]:
+def factor_covariance(
+    factor_cov: ArrayLike, exposures: ArrayLike, specific_var: ArrayLike
+) -> NDArray[np.float64]:
     """Compute B Sigma_f B.T + diag(specific_var), validating PSD inputs.
 
     Exposures are assets x factors; specific variances are asset-level.
@@ -88,7 +91,9 @@ def factor_covariance(factor_cov: ArrayLike, exposures: ArrayLike, specific_var:
     if eigenvalues[0] < -tolerance:
         raise ValueError("factor covariance must be positive semidefinite")
     if eigenvalues[0] < 0:
-        raise ValueError("factor covariance has negative eigenvalues within tolerance; repair externally")
+        raise ValueError(
+            "factor covariance has negative eigenvalues within tolerance; repair externally"
+        )
     specific = _vector(specific_var, "specific_var", b.shape[0])
     if np.any(specific < 0):
         raise ValueError("specific variances must be nonnegative")
@@ -106,7 +111,9 @@ def portfolio_factor_risk(weights: ArrayLike, asset_covariance: ArrayLike) -> fl
     w = _vector(weights, "weights", sigma.shape[0])
     if not np.allclose(sigma, sigma.T, rtol=1e-12, atol=1e-12):
         raise ValueError("asset covariance must be symmetric")
-    if np.linalg.eigvalsh((sigma + sigma.T) / 2)[0] < -1e-12 * max(1.0, float(np.linalg.norm(sigma, ord=2))):
+    if np.linalg.eigvalsh((sigma + sigma.T) / 2)[0] < -1e-12 * max(
+        1.0, float(np.linalg.norm(sigma, ord=2))
+    ):
         raise ValueError("asset covariance must be positive semidefinite")
     value = float(w @ sigma @ w)
     if not np.isfinite(value) or value < -1e-12:
@@ -114,7 +121,9 @@ def portfolio_factor_risk(weights: ArrayLike, asset_covariance: ArrayLike) -> fl
     return max(value, 0.0)
 
 
-def pca_factors(returns: ArrayLike, n_components: int) -> tuple[NDArray[np.float64], NDArray[np.float64], NDArray[np.float64]]:
+def pca_factors(
+    returns: ArrayLike, n_components: int
+) -> tuple[NDArray[np.float64], NDArray[np.float64], NDArray[np.float64]]:
     """Centered PCA using sample covariance; returns scores, loadings, eigenvalues.
 
     Eigenvectors have arbitrary signs. Requires more observations than assets
