@@ -1,0 +1,72 @@
+name: Annual Copyright Year Update
+
+on:
+  schedule:
+    - cron: '17 0 1 1 *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: annual-copyright-year-update
+  cancel-in-progress: false
+
+jobs:
+  update-copyright:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+
+      - name: Update copyright year
+        shell: bash
+        run: |
+          python - <<'PY'
+          from datetime import datetime, timezone
+          from pathlib import Path
+          import re
+
+          path = Path("NOTICE.md")
+          content = path.read_text(encoding="utf-8")
+          year = datetime.now(timezone.utc).year
+
+          pattern = (
+              r"Copyright © \d{4} "
+              r"Quassar Capital\. All Rights Reserved\."
+          )
+          replacement = (
+              f"Copyright © {year} "
+              "Quassar Capital. All Rights Reserved."
+          )
+
+          updated, count = re.subn(pattern, replacement, content)
+
+          if count != 1:
+              raise SystemExit(
+                  "Expected exactly one copyright declaration."
+              )
+
+          if updated != content:
+              path.write_text(updated, encoding="utf-8")
+          PY
+
+      - name: Commit and push if changed
+        shell: bash
+        run: |
+          if git diff --quiet -- NOTICE.md; then
+            echo "Copyright year already current."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email \
+            "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add NOTICE.md
+          git commit -m "chore: update copyright year"
+          git push origin HEAD:main
