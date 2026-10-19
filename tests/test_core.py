@@ -1,4 +1,3 @@
-
 """Independent numerical and adversarial tests for the factor research core."""
 
 import numpy as np

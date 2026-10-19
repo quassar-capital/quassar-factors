@@ -1,4 +1,3 @@
-
 """Numerical foundations for quantitative factor research."""
 
 from .core import (
