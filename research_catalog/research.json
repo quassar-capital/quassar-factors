@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "repository": "quassar-factors",
+  "research": [
+    {
+      "id": "01",
+      "title": "Systematic Factor Modeling",
+      "description": "Numerical foundations for systematic factor analysis.",
+      "implementation": [
+        "src/quassar_factors/core.py"
+      ],
+      "tests": [
+        "tests/test_core.py"
+      ],
+      "experiments": []
+    }
+  ]
+}
