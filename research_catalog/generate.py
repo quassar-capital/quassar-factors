@@ -26,7 +26,8 @@ def main():
     lines = [
         "## Research Programs & Scientific Implementations",
         "",
-        "The following research programs have corresponding scientific implementations in this repository.",
+        "The following research programs have corresponding "
+        "scientific implementations in this repository.",
         "",
     ]
 
