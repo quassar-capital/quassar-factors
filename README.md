@@ -10,6 +10,24 @@ Its research scope encompasses multifactor models, risk premia, factor sensitivi
 
 The methodological framework emphasizes economic interpretation, mathematical rigor, statistical robustness, numerical reliability, and reproducibility.
 
+<!-- RESEARCH_INDEX_START -->
+## Research Programs & Scientific Implementations
+
+The following research programs have corresponding scientific implementations in this repository.
+
+### Research 01 — Systematic Factor Modeling
+
+Numerical foundations for systematic factor analysis.
+
+**Scientific implementation**
+
+- [`core.py`](src/quassar_factors/core.py)
+
+**Automated validation**
+
+- [`test_core.py`](tests/test_core.py)
+<!-- RESEARCH_INDEX_END -->
+
 ## Research Domains
 
 ### Systematic Risk Factor Research
