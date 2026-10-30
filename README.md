@@ -1,3 +1,4 @@
+
 # Quassar Factors
 
 **Systematic Factor Research | Multifactor Modeling | Return Attribution | Cross-Asset Quantitative Analysis**
@@ -26,6 +27,20 @@ Numerical foundations for systematic factor analysis.
 **Automated validation**
 
 - [`test_core.py`](tests/test_core.py)
+
+### Research 02 — Identifiability and Spectral Recovery of Weak Factors in High-Dimensional Financial Systems
+
+Analytical and reproducible numerical investigation of weak-factor identifiability in high-dimensional Gaussian spiked covariance systems, including Marchenko-Pastur spectral boundaries, BBP separation thresholds, asymptotic eigenvector alignment, and finite-sample Monte Carlo recovery.
+
+**Scientific implementation**
+
+- [`spectral_model.py`](research_02/python/spectral_model.py)
+- [`factor_recovery.py`](research_02/python/factor_recovery.py)
+- [`README.md`](research_02/README.md)
+
+**Automated validation**
+
+- [`test_spectral_recovery.py`](research_02/tests/test_spectral_recovery.py)
 <!-- RESEARCH_INDEX_END -->
 
 ## Research Domains
