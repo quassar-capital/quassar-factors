@@ -102,9 +102,7 @@ def squared_direction_overlap(estimated: ArrayLike, reference: ArrayLike) -> flo
     a = np.asarray(estimated, dtype=np.float64)
     b = np.asarray(reference, dtype=np.float64)
     if a.ndim != 1 or b.ndim != 1 or a.shape != b.shape or a.size == 0:
-        raise ValueError(
-            "directions must be nonempty one-dimensional vectors of equal length"
-        )
+        raise ValueError("directions must be nonempty one-dimensional vectors of equal length")
     if not np.all(np.isfinite(a)) or not np.all(np.isfinite(b)):
         raise ValueError("directions must be finite")
     scale_a = float(np.max(np.abs(a)))
