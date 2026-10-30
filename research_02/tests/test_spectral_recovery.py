@@ -5,8 +5,8 @@ Tests cover BBP reference identities, population covariance structure,
 directional invariance, reproducibility, and finite-sample recovery.
 """
 
-from pathlib import Path
 import sys
+from pathlib import Path
 
 import numpy as np
 import pytest
