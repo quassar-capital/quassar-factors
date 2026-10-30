@@ -1,4 +1,3 @@
-
 """Reproducible finite-sample recovery experiments for weak spectral factors.
 
 The reference experiment uses independent Gaussian observations with population
@@ -47,9 +46,7 @@ class RecoverySummary:
 
 
 def _positive_integer(value: int, name: str) -> int:
-    if isinstance(value, (bool, np.bool_)) or not isinstance(
-        value, (int, np.integer)
-    ):
+    if isinstance(value, (bool, np.bool_)) or not isinstance(value, (int, np.integer)):
         raise ValueError(f"{name} must be a positive integer")
     result = int(value)
     if result <= 0:
@@ -81,9 +78,7 @@ def _unit_direction(direction: ArrayLike, dimension: int) -> NDArray[np.float64]
 
 
 def _validate_seed(seed: int) -> int:
-    if isinstance(seed, (bool, np.bool_)) or not isinstance(
-        seed, (int, np.integer)
-    ):
+    if isinstance(seed, (bool, np.bool_)) or not isinstance(seed, (int, np.integer)):
         raise ValueError("seed must be a nonnegative integer")
     result = int(seed)
     if result < 0:
@@ -115,9 +110,7 @@ def _simulate_once(
     leading_eigenvalue = float(eigenvalues[-1])
     leading_direction = eigenvectors[:, -1]
 
-    return leading_eigenvalue, squared_direction_overlap(
-        leading_direction, direction
-    )
+    return leading_eigenvalue, squared_direction_overlap(leading_direction, direction)
 
 
 def simulate_factor_recovery(
@@ -173,9 +166,7 @@ def monte_carlo_factor_recovery(
     overlaps = np.empty(m, dtype=np.float64)
 
     for index in range(m):
-        eigenvalues[index], overlaps[index] = _simulate_once(
-            n, t, theta, unit, rng
-        )
+        eigenvalues[index], overlaps[index] = _simulate_once(n, t, theta, unit, rng)
 
     return RecoverySummary(
         replications=m,
