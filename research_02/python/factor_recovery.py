@@ -15,7 +15,6 @@ from math import isfinite, sqrt
 
 import numpy as np
 from numpy.typing import ArrayLike, NDArray
-
 from spectral_model import (
     SpikeBenchmark,
     spike_benchmark,
