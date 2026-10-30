@@ -1,4 +1,3 @@
-
 """Analytical and numerical validation of spectral factor recovery.
 
 Tests cover BBP reference identities, population covariance structure,
@@ -67,12 +66,8 @@ def test_population_covariance_spectrum():
 
 def test_directional_overlap_is_sign_and_scale_invariant():
     reference = np.array([3.0, 4.0, 0.0])
-    assert squared_direction_overlap(reference, -7.0 * reference) == pytest.approx(
-        1.0
-    )
-    assert squared_direction_overlap(reference, [0.0, 0.0, 1.0]) == pytest.approx(
-        0.0
-    )
+    assert squared_direction_overlap(reference, -7.0 * reference) == pytest.approx(1.0)
+    assert squared_direction_overlap(reference, [0.0, 0.0, 1.0]) == pytest.approx(0.0)
 
 
 def test_invalid_spectral_parameters_are_rejected():
@@ -106,10 +101,13 @@ def test_monte_carlo_recovery_against_analytical_reference():
     assert result.replications == 40
     assert result.benchmark.separated
     assert result.mean_squared_overlap > 0.75
-    assert abs(
-        result.mean_leading_eigenvalue
-        - result.benchmark.leading_eigenvalue_limit
-    ) < 0.7
+    assert (
+        abs(
+            result.mean_leading_eigenvalue
+            - result.benchmark.leading_eigenvalue_limit
+        )
+        < 0.7
+    )
     assert result.std_leading_eigenvalue > 0.0
     assert result.std_squared_overlap >= 0.0
 
@@ -136,6 +134,4 @@ def test_invalid_simulation_contracts_are_rejected():
     with pytest.raises(ValueError):
         simulate_factor_recovery(2, 20, 1.0, [1.0, 1.0], seed=-1)
     with pytest.raises(ValueError):
-        monte_carlo_factor_recovery(
-            2, 20, 1.0, [1.0, 1.0], replications=0
-        )
+        monte_carlo_factor_recovery(2, 20, 1.0, [1.0, 1.0], replications=0)
