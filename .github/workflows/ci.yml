@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - feat/factors-engine-v1
+      - research-02-spectral-factor-recovery
       - main
   pull_request:
     branches:
@@ -44,3 +45,6 @@ jobs:
 
       - name: Execute numerical validation tests
         run: python -m pytest -v
+
+      - name: Execute Research 02 spectral recovery tests
+        run: python -m pytest -v research_02/tests/test_spectral_recovery.py

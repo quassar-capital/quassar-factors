@@ -1,4 +1,3 @@
-
 """Analytical benchmarks for high-dimensional spiked covariance models.
 
 Population covariance is I + theta * u u.T, with unit vector u and theta > 0.

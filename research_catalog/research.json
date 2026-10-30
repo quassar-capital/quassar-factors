@@ -1,3 +1,4 @@
+
 {
   "schema_version": 1,
   "repository": "quassar-factors",
@@ -11,6 +12,20 @@
       ],
       "tests": [
         "tests/test_core.py"
+      ],
+      "experiments": []
+    },
+    {
+      "id": "02",
+      "title": "Identifiability and Spectral Recovery of Weak Factors in High-Dimensional Financial Systems",
+      "description": "Analytical and reproducible numerical investigation of weak-factor identifiability in high-dimensional Gaussian spiked covariance systems, including Marchenko-Pastur spectral boundaries, BBP separation thresholds, asymptotic eigenvector alignment, and finite-sample Monte Carlo recovery.",
+      "implementation": [
+        "research_02/python/spectral_model.py",
+        "research_02/python/factor_recovery.py",
+        "research_02/README.md"
+      ],
+      "tests": [
+        "research_02/tests/test_spectral_recovery.py"
       ],
       "experiments": []
     }
