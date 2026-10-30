@@ -94,32 +94,20 @@ def test_simulation_is_reproducible_and_bounded():
 
 def test_monte_carlo_recovery_against_analytical_reference():
     direction = np.ones(8)
-    result = monte_carlo_factor_recovery(
-        8, 160, 3.0, direction, replications=40, seed=202
-    )
+    result = monte_carlo_factor_recovery(8, 160, 3.0, direction, replications=40, seed=202)
 
     assert result.replications == 40
     assert result.benchmark.separated
     assert result.mean_squared_overlap > 0.75
-    assert (
-        abs(
-            result.mean_leading_eigenvalue
-            - result.benchmark.leading_eigenvalue_limit
-        )
-        < 0.7
-    )
+    assert abs(result.mean_leading_eigenvalue - result.benchmark.leading_eigenvalue_limit) < 0.7
     assert result.std_leading_eigenvalue > 0.0
     assert result.std_squared_overlap >= 0.0
 
 
 def test_weak_factor_has_lower_recovery_than_strong_factor():
     direction = np.ones(12)
-    weak = monte_carlo_factor_recovery(
-        12, 120, 0.1, direction, replications=30, seed=303
-    )
-    strong = monte_carlo_factor_recovery(
-        12, 120, 4.0, direction, replications=30, seed=303
-    )
+    weak = monte_carlo_factor_recovery(12, 120, 0.1, direction, replications=30, seed=303)
+    strong = monte_carlo_factor_recovery(12, 120, 4.0, direction, replications=30, seed=303)
 
     assert not weak.benchmark.separated
     assert strong.benchmark.separated
